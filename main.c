@@ -41,10 +41,10 @@ void draw(int x1,int y1,int x2,int y2){
 }
 
 void drawTrangle(int x1,int y1,int x2,int y2,int x3,int y3){
-    int temp;
     int yUp,yDown;
-    if (x1>x2){temp=x1;x1=x2;x2=temp;temp=y1;y1=y2;y2=temp;}
-    if (x2>x3){temp=x2;x2=x3;x3=temp;temp=y2;y2=y3;y3=temp;}
+    if (x1>x2){int temp=x1;x1=x2;x2=temp;temp=y1;y1=y2;y2=temp;}
+    if (x2>x3){int temp=x2;x2=x3;x3=temp;temp=y2;y2=y3;y3=temp;}
+    if (x1>x2){int temp=x1;x1=x2;x2=temp;temp=y1;y1=y2;y2=temp;}
     int n1=x2-x1,n2=x3-x2;
     yUp=y1;yDown=y1;
     int F1=0,F2=0,xA1=x3-x1,yA1=y3-y1,xA2=x2-x1,yA2=y2-y1;
@@ -67,10 +67,8 @@ void drawTrangle(int x1,int y1,int x2,int y2,int x3,int y3){
                 else{yDown--;F2-=xA2;}
             }
         }
-        if (yDown>yUp){temp=yDown;yDown=yUp;yUp=temp;}
-        for (int j = yDown; j <= yUp; ++j) {
-            setpixel(x1+i,j);
-        }
+        if (yDown>yUp)for (int j = yUp; j <= yDown; ++j)setpixel(x1+i,j);
+        else for (int j = yDown; j <= yUp; ++j) setpixel(x1+i,j);
     }
     F1=0;F2=0;
     xA2=x3-x2;yA2=y3-y2;
@@ -93,16 +91,14 @@ void drawTrangle(int x1,int y1,int x2,int y2,int x3,int y3){
                 else{yDown--;F2-=xA2;}
             }
         }
-        if (yDown>yUp){temp=yDown;yDown=yUp;yUp=temp;}
-        for (int j = yDown; j <= yUp; ++j) {
-            setpixel(x2+i,j);
-        }
+        if (yDown>yUp)for (int j = yUp; j <= yDown; ++j)setpixel(x2+i,j);
+        else for (int j = yDown; j <= yUp; ++j) setpixel(x2+i,j);
     }
 }
 
 
 int main(){
     memset(img, 255, sizeof(img));
-    drawTrangle(200,0,0,200,400,400);
+    drawTrangle(200,300,100,400,0,0);
     svpng(fopen("line_bresenham.png", "wb"), Width, Height, img, 0);
 }
