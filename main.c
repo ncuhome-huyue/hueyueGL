@@ -76,7 +76,7 @@ void drawTrangle(int x1,int y1,int x2,int y2,int x3,int y3){
         else for (int j = yDown; j <= yUp; ++j) setpixel(x1+i,j);
     }
     //第二次画三角
-    F1=0;F2=0;
+    F2=0;
     xA2=x3-x2;yA2=y3-y2;
     for (int i = 0; i <= n2; ++i) {
         while (true){
@@ -105,6 +105,13 @@ void drawTrangle(int x1,int y1,int x2,int y2,int x3,int y3){
 
 int main(){
     memset(img, 255, sizeof(img));
-    drawTrangle(200,300,200,400,0,0);
+    int x1,y1,x2,y2,x3,y3;
+    std::cin>>x1;
+    std::cin>>y1;
+    std::cin>>x2;
+    std::cin>>y2;
+    std::cin>>x3;
+    std::cin>>y3;
+    drawTrangle(x1,y1,x2,y2,x3,y3);
     svpng(fopen("line_bresenham.png", "wb"), Width, Height, img, 0);
 }
